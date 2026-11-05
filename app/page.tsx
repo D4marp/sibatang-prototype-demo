@@ -6,19 +6,6 @@ import { Button, Card, H2, Kpi, Note, Pill } from "@/components/ui";
 import { metrics, useStore } from "@/lib/store";
 import { runTour } from "@/lib/tour";
 
-const Box = ({ t, children, gold }: { t: string; children: React.ReactNode; gold?: boolean }) => (
-  <div className={`rounded-xl border p-3 text-[13px] ${gold ? "border-[#eadba5] bg-[#fbf6e6]" : "border-line bg-[#f8faff]"}`}>
-    <b className="mb-0.5 block text-navy">{t}</b>{children}
-  </div>
-);
-const Layer = ({ t, children, cols }: { t: string; children: React.ReactNode; cols: string }) => (
-  <div className="grid gap-3 lg:grid-cols-[100px_1fr]">
-    <div className="flex items-center text-[11px] font-bold uppercase tracking-[0.12em] text-mute">{t}</div>
-    <div className={`grid gap-2.5 ${cols}`}>{children}</div>
-  </div>
-);
-const Conn = ({ children }: { children: React.ReactNode }) => <div className="text-center text-[11.5px] text-mute lg:ml-[112px]">{children}</div>;
-
 export default function Home() {
   const m = metrics(useStore());
   const router = useRouter();
@@ -59,25 +46,6 @@ export default function Home() {
           </Card>
         ))}
       </div>
-
-      <H2>Arsitektur</H2>
-      <Card className="grid gap-2">
-        <Layer t="Klien" cols="md:grid-cols-3">
-          <Box t="Web Next.js 16">Publik SIBATANG · Admin Polres · Dashboard Polda</Box>
-          <Box t="Flutter Android">Booking, e-tiket QR, status antrean</Box>
-          <Box t="Flutter Desktop Windows">Kiosk · Operator · Layar TV · Announcer</Box>
-        </Layer>
-        <Conn>▼ REST (satu kontrak OpenAPI → klien TS &amp; Dart ter-generate) + SSE ▼</Conn>
-        <Layer t="Backend" cols="md:grid-cols-2">
-          <Box t="Go · modular monolith" gold>Auth &amp; RBAC · Booking &amp; slot · Check-in &amp; tiket · Antrean · Announcer · Laporan · Audit</Box>
-          <Box t="Worker" gold>Outbox, pengingat, agregasi Polda, kedaluwarsa slot</Box>
-        </Layer>
-        <Conn>▼ pgx / sqlc ▼</Conn>
-        <Layer t="Data" cols="md:grid-cols-2">
-          <Box t="PostgreSQL 18 + RLS">Tenant &amp; site · transaksi atomik · audit &amp; event transaksional</Box>
-          <Box t="Self-hosted / privat">TLS · backup terenkripsi teruji · perangkat site dapat dicabut</Box>
-        </Layer>
-      </Card>
 
       <H2>Layanan Pilot Batang</H2>
       <div className="grid gap-4 md:grid-cols-3">
